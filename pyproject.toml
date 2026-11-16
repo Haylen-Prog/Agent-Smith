@@ -1,0 +1,5 @@
+[project]
+name = "common-core-agent-smith-a46f440a-503d-4091-972e-af6de2195aee"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = []
