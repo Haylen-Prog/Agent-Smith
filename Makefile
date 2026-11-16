@@ -1,17 +1,51 @@
+.PHONY : help install run lint-strict clean fclean erase add remove push
+
+# Usual
+
+help:
+	@echo "- USUAL COMMAND -"
+	@echo "	install: "
+	@echo "	run: "
+	@echo "	lint-strict:"
+	@echo "	clean: "
+	@echo "	fclean: "
+	@echo "	erase: "
+	@echo "- DEV COMMAND ONLY -"
+	@echo "	add: "
+	@echo "	remove: "
+	@echo "	push: "
 install:
-	uv sync
+	@uv sync
 
 run: install
-	uv run python -m src
+	@uv run python -m src
 
-lint:
+sandbox-run:
+	@uv run sandbox
 
-lint-strict:
+lint-strict: install
+	flake8 . && \
+	mypy . --strict
+
+clean:
+	./scripts/clean.sh
+
+fclean:
+
+erase:
+
+
+# Dev
+add:
+	@uv add $(PKG)
+
+remove:
+	@uv remove $(PKG)
 
 push:
 	@set -e && \
 	read -p "Commit message: " ANSWER && \
 	git add . && \
 	git log && \
-	git commit -m "(ANSWER)" && \
+	git commit -m "$(ANSWER)" && \
 	git push
