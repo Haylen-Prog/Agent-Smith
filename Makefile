@@ -14,6 +14,7 @@ help:
 	@echo "	add: "
 	@echo "	remove: "
 	@echo "	push: "
+
 install:
 	@uv sync
 
@@ -28,13 +29,13 @@ lint-strict: install
 	mypy . --strict
 
 clean:
-	@./scripts/clean.sh clean
+	@. ./scripts/clean.sh && clean
 
 fclean:
-	@./scripts/clean.sh fclean
+	@. ./scripts/clean.sh && fclean
 
 erase:
-
+	@. ./scripts/clean.sh && erase
 
 # Dev
 add:
