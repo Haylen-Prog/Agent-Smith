@@ -28,9 +28,10 @@ lint-strict: install
 	mypy . --strict
 
 clean:
-	./scripts/clean.sh
+	@./scripts/clean.sh clean
 
 fclean:
+	@./scripts/clean.sh fclean
 
 erase:
 
@@ -43,9 +44,7 @@ remove:
 	@uv remove $(PKG)
 
 push:
-	@set -e && \
-	read -p "Commit message: " ANSWER && \
-	git add . && \
-	git log && \
-	git commit -m "$(ANSWER)" && \
-	git push
+	@set -e; \
+	printf "Commit message: "; \
+	read -r ANSWER; \
+	git add . && git commit -m "$$ANSWER" && git push
