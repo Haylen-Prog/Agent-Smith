@@ -7,9 +7,12 @@ clean() {
 
 fclean() {
 	echo "Erase virtual environnement.. "; \
-	find . \( -name ".venv" \) -exec rm -rf {} +
+	find "$1/.venv" -exec rm -rf {} +
 }
 
 erase() {
-	echo "Erase virtual environnement.. "; \
+	echo "Erase all project.."; \
+	rm -rf "/goinfre/azinciry/containers/AgentSmith"
+	rm -rf "moulinette"
+	rm -rf ".venv"
 }

@@ -3,3 +3,6 @@ __pycache__
 .mypy_cache
 GEMINI.md
 AGENTS.md
+.env
+moulinette
+moulinette.zip
