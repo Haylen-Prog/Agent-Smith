@@ -1,39 +1,41 @@
 PROJECT = /goinfre/azinciry/containers/AgentSmith
 
-.PHONY : help setup install run sandbox-run lint-strict clean fclean erase add remove push
+.PHONY : help setup install run all sandbox-run lint-strict clean fclean erase re add remove push
 
 # Usual
 
 help:
-	@echo "- USUAL COMMAND -"
+	@echo "- USUAL COMMAND - "
 	@echo "	setup: "
 	@echo "	install: "
 	@echo "	run: "
-	@echo "	lint-strict:"
+	@echo "	lint-strict: "
 	@echo "	clean: "
 	@echo "	fclean: "
 	@echo "	erase: "
 	@echo "- DEV COMMAND ONLY -"
-	@echo "	add: "
+	@echo "	add:  "
 	@echo "	remove: "
 	@echo "	push: "
 
 setup:
-	@uv python install 3.10; \
-	uv python pin 3.10; \
-	mkdir "$(PROJECT)/"; \
-	uv venv "$(PROJECT)/.venv"; \
+	@uv python install 3.10 && \
+	uv python pin 3.10 && \
+	mkdir "$(PROJECT)/" && \
+	uv venv "$(PROJECT)/.venv" && \
 	ln -s "$(PROJECT)/.venv" ".venv"
-	cp "moulinette.zip" "$(PROJECT)"; \
-	cd  "$(PROJECT)"; \
+	cp "moulinette.zip" "$(PROJECT)" && \
+	cd  "$(PROJECT)" && \
 	unzip "moulinette.zip"
 	@ln -s "$(PROJECT)/moulinette" "moulinette"
 
-install: setup
+install:
 	@uv sync
 
 run: install
 	@uv run python -m src
+
+all: setup install run
 
 sandbox-run: install
 	@uv run sandbox
@@ -46,10 +48,12 @@ clean:
 	@. ./scripts/clean.sh && clean
 
 fclean: clean
-	@. ./scripts/clean.sh && fclean $(PROJECT)
+	@. ./scripts/clean.sh && fclean "$(PROJECT)"
 
 erase:
-	@. ./scripts/clean.sh && erase
+	@. ./scripts/clean.sh && erase "$(PROJECT)""
+
+re: erase all
 
 # Dev
 add:
@@ -62,6 +66,6 @@ REMOTE ?= all
 
 push:
 	@set -e; \
-	printf "Commit message: "; \
-	read -r ANSWER; \
+	printf "Commit message: " && \
+	read -r ANSWER && \
 	git add . && git commit -m "$$ANSWER" && git push $(REMOTE)
