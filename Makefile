@@ -51,7 +51,7 @@ fclean: clean
 	@. ./scripts/clean.sh && fclean "$(PROJECT)"
 
 erase:
-	@. ./scripts/clean.sh && erase "$(PROJECT)""
+	@. ./scripts/clean.sh && erase "$(PROJECT)"
 
 re: erase all
 
@@ -68,4 +68,4 @@ push:
 	@set -e; \
 	printf "Commit message: " && \
 	read -r ANSWER && \
-	git add . && git commit -m "$$ANSWER" && git push $(REMOTE)
+	git add . && git commit -m "$$ANSWER" && git push "$(REMOTE)"
