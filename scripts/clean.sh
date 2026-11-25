@@ -7,7 +7,7 @@ clean() {
 
 fclean() {
 	echo "Erase virtual environnement.. "; \
-	find . -type f \( -name ".venv" \) -exec rm -rf {} +
+	find . \( -name ".venv" \) -exec rm -rf {} +
 }
 
 erase() {

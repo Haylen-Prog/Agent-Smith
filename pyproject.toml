@@ -2,4 +2,8 @@
 name = "common-core-agent-smith-a46f440a-503d-4091-972e-af6de2195aee"
 version = "0.1.0"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "flake8>=7.4.1",
+    "mypy>=2.4.1",
+    "pydantic>=2.14.4",
+]

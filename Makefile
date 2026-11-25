@@ -31,10 +31,10 @@ lint-strict: install
 clean:
 	@. ./scripts/clean.sh && clean
 
-fclean:
+fclean: clean
 	@. ./scripts/clean.sh && fclean
 
-erase:
+erase: fclean
 	@. ./scripts/clean.sh && erase
 
 # Dev
