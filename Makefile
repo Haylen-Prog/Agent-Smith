@@ -21,7 +21,7 @@ install:
 run: install
 	@uv run python -m src
 
-sandbox-run:
+sandbox-run: install
 	@uv run sandbox
 
 lint-strict: install
@@ -44,8 +44,10 @@ add:
 remove:
 	@uv remove $(PKG)
 
+REMOTE ?= origin
+
 push:
 	@set -e; \
 	printf "Commit message: "; \
 	read -r ANSWER; \
-	git add . && git commit -m "$$ANSWER" && git push
+	git add . && git commit -m "$$ANSWER" && git push $(REMOTE)
